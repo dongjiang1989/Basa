@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://phpdox.net/config">
+ <project name="Basa" source="./" workdir="phpdox">
+  <collector publiconly="false">
+   <include mask="src/*.*" />
+   <exclude mask="unittest report" />
+  </collector>
+
+  <generator output="report/">
+   <build engine="html" enabled="true" output="api">
+    <file extension="html" />
+   </build>
+  </generator>
+ </project>
+</phpdox>
+

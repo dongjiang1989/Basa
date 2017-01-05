@@ -1,0 +1,15 @@
+ message SimbaGoods {
+   optional int64 version = 1;
+   optional int64 goods_id = 2;
+   optional string nick = 3;
+   optional string zk_time = 4;
+   optional string zk_rate = 5;
+   optional string zk_final_price = 6;
+   optional string zk_time_wap = 7;
+   optional string zk_rate_wap = 8;
+   optional string zk_final_price_wap = 9;
+   optional int32 sold_quantity_total = 10;
+   optional int32 sold_quantity_30day = 11;
+   optional int32 biz_30day = 12;
+   optional int64 update_time = 13;
+}

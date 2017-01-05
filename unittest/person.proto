@@ -1,0 +1,20 @@
+message Person {
+    required string name = 1;///sdfsfsdffds
+    required int32 id = 2;
+    optional string email = 3;
+
+    repeated string ok = 8;
+    enum PhoneType {
+        MOBILE = 0;
+        HOME = 1;
+        WORK = 2;
+    }
+    repeated PhoneType pt = 7;
+    message PhoneNumber {
+        required string aaa = 1;
+        optional uint64 bb =2;
+    }
+    repeated PhoneNumber phone = 4;
+    optional repeated PhoneNumber phone1 = 6;
+    optional PhoneNumber phone2 = 9;
+}

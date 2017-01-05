@@ -1,0 +1,259 @@
+message snQuery {
+	required bytes query=1;
+	optional bytes bucketid=2;
+	
+	optional QrMessage qr=3;
+	repeated uint32 queryIds=4; 
+	repeated uint32 subcrowdIds=5; 
+}
+
+message QrMessage {
+  optional Query query = 1;  
+  repeated RewrittenQuery rewritten_query = 2;  
+}
+
+
+message SegTag {
+  optional uint32 id = 1;
+  optional uint32 weight = 2;
+}
+
+message Term {
+  optional bytes word = 1;  
+  optional uint32 weight = 2;  
+  repeated SegTag tag = 3;  
+  repeated bytes synonymous_word = 4;  
+  optional uint32 parent_index = 5;  
+}
+
+message RedTerm {
+  optional bytes word = 1;  
+  repeated bytes synonymous_word = 2;  
+}
+
+message Property {
+  optional uint32 id = 1;  
+  optional uint32 weight = 2;  
+}
+
+message Category {
+  optional uint32 id = 1;  
+  optional uint32 weight = 2;  
+  repeated Property property = 3;  
+}
+
+message Text {
+  optional bytes original = 1;  
+  optional bytes simple_norm = 2;  
+  optional bytes sorted_norm = 3;  
+  repeated Term semantic_term = 4;  
+  repeated Term retrieval_term = 5;  
+}
+
+
+message Query {
+  optional bytes keyword = 1;  
+  repeated uint32 front_category_id = 2 [packed=true];  
+  repeated uint32 category_id = 3 [packed=true];        
+  repeated uint32 property_id = 4 [packed=true];        
+  optional bytes simple_norm_keyword = 5;  
+  optional bytes sorted_norm_keyword = 6;  
+  repeated Term semantic_term = 7;   
+  repeated Term retrieval_term = 8;  
+  repeated RedTerm red_term = 9;     
+  repeated Category rank_info = 10;  
+  repeated Cluster cluster_info = 11;  
+  optional uint32 rank = 12;  
+  optional uint32 keyword_type = 13;  
+}
+
+message Cluster {
+  optional uint32 id = 1;           
+  optional uint32 category_id = 2;  
+}
+
+message Ad {
+  optional fixed32 group_id = 1;                    
+  optional fixed32 campaign_id = 2;                 
+  optional fixed32 customer_id = 3;                 
+  repeated uint32 category_id = 4 [packed=true];    
+  repeated uint32 property_id = 5 [packed=true];    
+  repeated Creative creative = 6;                   
+}
+
+message RewritingInfo {
+  optional uint32 type = 1;  
+  optional uint32 weight = 2;  
+  optional uint32 search_type = 3;  
+  optional uint32 match_type = 4;  
+  optional uint32 qbscore = 5;    
+  optional uint32 alloc_weight = 6; 
+}
+
+message RewrittenQuery {
+  optional Query search_content = 1;  
+  optional RewritingInfo rewriting_info = 2;  
+  optional uint32 match_level = 3;  
+}
+
+message QrInfo {
+  optional uint32 type = 1;  
+  optional bytes content = 2;  
+  optional uint32 weight = 3;  
+  repeated Category category = 4;  
+  optional uint32 search_type = 5;  
+  optional uint32 match_type = 6;  
+  optional uint32 match_level = 7;  
+  optional bytes simple_norm_bidword = 8;  
+  optional bytes sorted_norm_bidword = 9;  
+  repeated Term semantic_term = 10;  
+  repeated Term retrieval_term = 11;  
+}
+
+message Creative {
+  optional fixed32 creative_id = 1;  
+  optional bytes title = 2;  
+  repeated Term semantic_term = 3;  
+  repeated Term retrieval_term = 4;  
+}
+
+
+message BidInfo {
+  optional uint64 id = 1;  
+  optional uint32 price = 2;  
+  optional bytes keyword = 3; 
+  optional RewrittenQuery rewritten_query = 4; 
+}
+
+message Location {
+  optional bytes province = 1;  
+  optional bytes city = 2;      
+}
+
+message PostFee {
+  optional bool free = 1;       
+  optional uint32 ems = 2;      
+  optional uint32 fast = 3;     
+  optional uint32 ordinary = 4; 
+}
+
+message Picture {
+  optional bytes url = 1;
+  optional uint32 score = 2;
+}
+
+message ItemRate {
+  optional uint32 score = 1;    
+  optional uint32 quantity = 2; 
+}
+
+
+message Spu {
+  optional bytes spu_id = 1; 
+  optional int32 category_id = 2; 
+  optional int32 item_num = 3; 
+  optional float avg_price = 4; 
+  optional float avg_post_fee = 5; 
+  optional float avg_sold_quantity = 6; 
+}
+
+
+message ShopRate {
+  optional uint32 item = 1;     
+  optional uint32 service = 2;  
+  optional uint32 delivery = 3; 
+}
+
+message Item {
+  optional uint64 id = 1;  
+  optional User user = 2; 
+  optional bytes title = 3;  
+  repeated uint32 category_id = 4 [packed=true];  
+  repeated uint32 property_id = 5 [packed=true];  
+  optional Picture picture = 6; 
+  optional uint32 price = 7;    
+  optional uint32 stock = 8;    
+  optional Shop shop = 9;       
+  optional uint32 type = 10;     
+  optional Spu spu = 11;        
+  optional Spu category_price = 12; 
+  optional uint32 fav = 13;     
+  optional uint32 sales = 14;   
+  optional ItemRate rate = 15;  
+  optional PostFee post_fee = 16; 
+}
+
+
+message Shop {
+  optional uint64 id = 1; 
+  optional uint64 user_id = 2; 
+  optional uint32 type = 3; 
+  optional uint32 item_quantity = 4;  
+  optional bool is_p4p = 5; 
+  optional bytes seller_star = 6; 
+  optional float dsr_fw = 7;  
+  optional float dsr_fh = 8;  
+  optional float dsr_wl = 9;  
+  optional float dsr_zl = 10;  
+  optional int64 promoted_service = 11; 
+  optional int64 fav_number = 12; 
+  optional float seller_rating = 13; 
+  optional bytes theme = 14; 
+}
+
+
+message User {
+  optional uint64 id = 1;           
+  optional uint32 age = 2;          
+  optional uint32 gender = 3;       
+  optional Location location = 4;   
+  optional bytes cookie = 5;        
+}
+
+
+message Context {
+  optional fixed32 timestamp = 1;   
+  optional bytes pid = 2;           
+  optional bytes ref_pid = 3;       
+  optional bytes ab_tag = 4;
+  optional uint32 page_number = 5;
+  optional uint32 ad_amount = 6;
+  optional uint32 qr_info_index = 7;
+  optional uint32 max_price = 8;
+  optional uint32 position = 9;     
+}
+
+
+message ItemSiteStat {
+	optional Item item = 1; 
+	optional int64 IPV = 2; 
+	optional int64 searchIPV = 3; 
+	optional int64 listIPV = 4; 
+	optional int64 shopIPV = 5; 
+	optional int64 GMV = 6; 
+	optional int64 searchGMV = 7; 
+	optional int64 listGMV = 8; 
+	optional int64 shopGMV = 9; 
+}
+
+
+message UserExt {
+	optional User basic_info = 1; 
+	optional float buyer_star = 2; 
+	optional float buy_power = 3; 
+}
+
+
+message ItemExt {
+	optional Item basic_info = 1; 
+	optional int32 type = 2; 
+	optional float spu_price = 3; 
+	optional Picture pic = 4; 
+	optional int32 pic_num = 5; 
+	optional int64 rating_num = 6; 
+	optional int64 good_rating_num= 7; 
+	optional int64 product_num = 8; 
+	
+	
+	
+}

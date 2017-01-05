@@ -1,0 +1,8 @@
+<phpunit>
+<filter>
+  <blacklist>
+    <directory suffix=".php">./src/tools/htmllib/</directory>
+    <file>./unittest/pb_proto_person.php</file>
+  </blacklist>
+</filter>
+</phpunit>

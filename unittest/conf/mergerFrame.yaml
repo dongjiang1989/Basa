@@ -1,0 +1,1911 @@
+#merger框架的配置文件，不支持动态加载
+#注意不要使用跳格tab键
+mainsection :
+  log4cpp_conf : /home/a/search/conf/log4cpp-merger.conf
+  log4cpp_category : merger
+  front_api_name : kfc
+  front_kfc_sock : /tmp/merger.sock
+  front_group : merger
+  service_timeout : 1000
+  monitor_path : /home/a/search/bin
+  queryhelper_conf : /home/a/search/conf/queryhelper.conf
+  data_source_config_file : /home/a/search/conf/datasource_cm9.conf
+
+dynamicHandlerSection :
+  OrsHandler : /home/a/search/plugin/libmatch_handler_ors.so
+  GtQueryParserHandler : /home/a/search/plugin/libcom_handler_gt.so
+  GtBidHandler : /home/a/search/plugin/libcom_handler_gt.so
+  GtResultHandler : /home/a/search/plugin/libcom_handler_gt.so
+  SearchDmpHandler : /home/a/search/plugin/libcom_handler_gt.so
+  SearchGtDNHandler : /home/a/search/plugin/libcom_handler_gt.so
+  SearchGtSNHandler : /home/a/search/plugin/libcom_handler_gt.so
+  SearchItemGtSNHandler : /home/a/search/plugin/libcom_handler_gt.so
+  SearchItemGtDNHandler : /home/a/search/plugin/libcom_handler_gt.so
+  BidHandler : /home/a/search/plugin/libcom_handler_it.so
+  PvAdDistinctHandler : /home/a/search/plugin/libcom_handler_it.so
+  DisplayByRandomHandler : /home/a/search/plugin/libcom_handler_it.so
+  DisplayControlHandler : /home/a/search/plugin/libcom_handler_it.so
+  FilterHandler : /home/a/search/plugin/libcom_handler_it.so
+  FilterNoWantCatsHandler : /home/a/search/plugin/libcom_handler_it.so
+  QueryParserHandler : /home/a/search/plugin/libcom_handler_it.so
+  QueryPrepareHandler : /home/a/search/plugin/libcom_handler_it.so
+  ResultHandler : /home/a/search/plugin/libcom_handler_it.so
+  RmDupHandler : /home/a/search/plugin/libcom_handler_it.so
+  SearchCacheHandler : /home/a/search/plugin/libcom_handler_it.so
+  SearchDNHandler : /home/a/search/plugin/libcom_handler_it.so
+  SearchSNHandler : /home/a/search/plugin/libcom_handler_it.so
+  CrowdComposerSNHandler : /home/a/search/plugin/libcom_handler_it.so
+  SortByEcpmHandler : /home/a/search/plugin/libcom_handler_it.so
+  SortHandler : /home/a/search/plugin/libcom_handler_it.so
+  UGetNickHandler : /home/a/search/plugin/libcom_handler_it.so
+  UpdateCacheHandler : /home/a/search/plugin/libcom_handler_it.so
+  AddQRHandler : /home/a/search/plugin/libmatch_handler_add.so
+  BtQRHandler : /home/a/search/plugin/libmatch_handler_bt.so
+  EtrecomQRHandler : /home/a/search/plugin/libmatch_handler_etrecom.so
+  OptimizerQRHandler : /home/a/search/plugin/libmatch_handler_optimizer.so
+  RccQRHandler : /home/a/search/plugin/libmatch_handler_rcc.so
+  Rcc2QRHandler : /home/a/search/plugin/libmatch_handler_rcc2.so
+  RecomQRHandler : /home/a/search/plugin/libmatch_handler_recom.so
+  UrlQRHandler : /home/a/search/plugin/libmatch_handler_url.so
+  UserQRHandler : /home/a/search/plugin/libmatch_handler_user.so
+  VtQRHandler : /home/a/search/plugin/libmatch_handler_vt.so
+  AddCreativeidHandler : /home/a/search/plugin/libmatch_handler_addcreative.so 
+  CrowdComposerHandler : /home/a/search/plugin/libmatch_handler_crowd.so
+  OutbtQRHandler : /home/a/search/plugin/libmatch_handler_outbt.so
+  FusionQRHandler : /home/a/search/plugin/libmatch_handler_fusion.so
+  MatchService : /home/a/search/plugin/libmatch_service.so
+  FatigueControlQRHandler : /home/a/search/plugin/libmatch_handler_fatiguecontrol.so
+  UserModelQRHandler : /home/a/search/plugin/libmatch_handler_usermodel.so                                            
+
+UserModelQRHandler :
+  version : 0
+  user_model_aconline_ds : online_usermodel_ac_ds
+  user_model_nickonline_ds : online_usermodel_nick_ds
+  user_model_acoffline_ds : offline_usermodel_ac_ds
+  user_model_nickoffline_ds: offline_usermodel_nick_ds
+
+PidDispatcher :
+  map_file_path: /home/a/search/data/pid_bucketgroup.tdbm
+  default_bucket_group: default
+
+bucketTest :
+  bktTestConfPath : /home/a/search/conf/bucket-conf.yaml
+  bktTestConfReload : enabled
+  bktConfRetryTimes : 100
+
+QueryParserHandler :
+  default_rowcount : 5
+  max_rowcount : 500
+  default_offset : 0
+  # 去重时，每一个客户保留几条广告，原来叫 count_of_same
+  max_ad_per_cust : 2
+  query_name : queryk2
+
+QueryPrepareHandler:
+  # 给SN预留的条数
+  spare_item_count : 3
+  # 给前端预留的广告条数
+  spare_item_count_fe : 3
+  # 行为预测算法版本号
+  bt_version: 2
+  # rank算法版本号
+  rank_version: 2
+  # mufasa算法版本号
+  mufasa_version: 2
+  # qscore算法版本号
+  qscore_version: 0
+  alpha : 1.0
+  # 外投排序biscore指数
+  wt_bidscore_rate : 1.0
+  # 外投排序defprice指数
+  wt_price_rate : 0.5
+  # 概率随机展现的可调参数
+  random_alpha : 1000
+  # 是否随机展现，用于QA的时候
+  ad_random : 1
+  # 对补足广告的折扣
+  discount : 0.8
+  # 最低价格
+  smallest_price : 5
+  bought_online_nick_ds : online_nicktable_ds
+  bought_online_acookie_ds : online_actable_ds
+  bought_offline_nick_ds : offline_nicktable_ds
+  bought_offline_acookie_ds : offline_actable_ds
+  white_list_path : /home/a/share/k2/rcc2/data/filter_rule.tdbm
+  pid_filer_info_ds : pid_filer_info_ds
+  uinode_info_ds : uinode_info_ds
+
+SearchSNHandler:
+  querysn_plan: queryk2
+
+CrowdComposerSNHandler:
+  crowdsn_plan: querycc
+
+SearchDNHandler:
+  querydn_plan: queryad
+
+SearchItemGtSNHandler:
+  item_gtsn_plan: queryigsn
+
+SearchItemGtDNHandler:
+  item_gtdn_plan: queryad 
+
+DisplayControlHandler:
+  dispctrl_def_max_frequency : 2
+  dispctrl_ac_pv_feedback_datasource: ac_pv_feedback_ds
+  dispctrl_nick_pv_feedback_datasource: nick_pv_feedback_ds
+
+SearchCacheHandler : 
+  search_cache_datasource : search_cache_ds
+  # cache的广告数
+  cache_adnum: 80
+  # cache的版本号，当SN返回字段发生变化时，需要更新此版本号
+  cache_version: 1
+  cache_percent : 0
+  cache_bucketid : 1007
+  noncache_bucketid : 1008
+  # # 对tair连续超时该次数时，降低对tair的访问次数 
+  tair_failed_tolerance : 200
+  # 连续超时次数后，按概率每该次数尝试访问一次tair
+  tair_frequency_when_failed : 50
+
+SortByEcpmHandler :
+
+DisplayByRandomHandler :
+
+PvAdDistinctHandler :
+  is_distinct: 1
+  pv_distinct_pid: pv_distinct_pid_ds
+  pv_distinct_ad: pv_distinct_ad_ds
+
+ResultHandler :
+  return_list: ADGROUPID,BIDWORDID,CAMPAIGNID,CUSTID,FEATUREWORD,MATCHTYPE,MODTIME,QUERYID,RANKSCORE,CREATIVEID,CATID,ISPAYPROTECT,LOCATION,LOCATIONID,WANGWANGID,GOODSID,PROPERTYID,DEFPRICE,POSTAGE,GOODSPRICE,CREATIVETYPE,CREATIVEELEMENTS,CATNAME,ISTAOBAOMALL,SELLERSUM,SELLEREXTENSION,SELL,ADGEXTENSION,ISGLOBAL,ISHK,DIMENSION,PROMOPRICE,FIRSTRANK,STATICSCORE,FINALPRICE,TAGVALUE,SELLERID,OUTSIDEDISCOUNT,TAGPRICE,TIMINGDISCOUNT
+
+QRPluginHandler :
+  plugin_dir : /home/a/search/plugin/qr/
+  qr_conf_dir : /home/a/share/k2/
+
+BtQRHandler :
+  version : 0
+
+VtQRHandler :
+  version : 0
+
+EtrecomQRHandler :
+  version : 0
+
+RccQRHandler :
+  version : 0
+Rcc2QRHandler :
+  version : 0
+
+RecomQRHandler :
+  version : 0
+
+AddQRHandler :
+  version : 0
+  use_add : 1
+
+OptimizerQRHandler :
+  version : 0
+  use_optimizer : 1
+
+UrlQRHandler:
+  url_datasource : url_ds
+  
+OutbtQRHandler:
+  outbt_datasource : outbt_ds
+  outbt_matchtype: uitnode
+
+UserQRHandler:
+  user_datasource: user_ds
+  user_weight_score : 50000000
+  user_nodeinfo : /home/a/share/k2/rcc2/data/nodeinfo.tdbm
+
+PostQRResultHandler :
+
+OrsHandler :
+  version : 0
+  ors_nickrtp_ds: nickrtp_ds
+  ors_plsa_ds: ors_plsa_ds  
+  ors_nickrcc2_ds: online_nicktable_ds
+  ors_tair_timeout : 3
+  ors_accept_match_types : 2,3,5,8,
+  is_rcc_rtp : 1
+
+UGetNickHandler :
+  ugnick_utdid_datasource: ugnick_utdid_ds
+  ugnick_imei_datasource: ugnick_imei_ds
+
+GtQueryParserHandler :
+  gt_default_rowcount : 5
+  gt_max_rowcount : 500
+  gt_query_name : querygt
+
+SearchDmpHandler:
+  #place_prefix : 位置_
+  general_prefix : 系统_通投
+  pid2levels_datasource: pid2levels_ds
+
+SearchGtSNHandler:
+  querygtsn_plan: querygtsn
+
+SearchGtDNHandler:
+  querygtdn_plan: querygtdn
+
+SearchItemGtSNHandler:
+  item_gtsn_plan: queryigsn
+
+SearchItemGtDNHandler:
+  item_gtdn_plan: queryad
+
+CrowdComposerHandler:
+  nick_tag_datasource: nick_tag_ds
+  acookie_tag_datasource: acookie_tag_ds
+
+GtBidHandler:
+  gt_discount : 0.8
+  gt_alpha : 1
+  gt_min_price : 5
+
+GtResultHandler:
+  gt_return_list: ADGROUPID,CAMPAIGNID,CREATIVEID,CUSTID,QUERYID,TAGVALUE,ADGROUPTAGID,FINALPRICE,CREATIVEELEMENTS,WANGWANGID,ISPAYPROTECT,ESCORE,RANKSCORE,ISTAOBAOMALL,LOCATION,SELLEREXTENSION,SHOPID,SELLERSUM,OUTSIDEKEY,DEFPRICE,SELLERID,CATID,CATNAME,CREATIVETYPE,DIMENSION,FEATUREWORD,FIRSTRANK,GOODSID,GOODSPRICE,ISGLOBAL,ISHK,MATCHTYPE,MODTIME,POSTAGE,PROMOPRICE,PROPERTYID,SELL,STATICSCORE
+
+FilterHandler:
+  pid_filer_info_ds: pid_filer_info_ds
+  cate_data_conf_ds: cate_data_conf_ds
+  uinode_info_ds: uinode_info_ds
+  add_num: 2
+  add_weight: 1
+
+FilterNoWantCatsHandler:
+  pid_filer_info_ds: pid_filer_info_ds
+
+MatchService:
+  match_server_conf : /home/a/search/conf/match_server.conf
+  match_server_timeout : 10
+  arpc_log_config : /home/a/search/conf/log4cpp-merger.conf
+
+FusionQRHandler :
+  matchtype_ratio_db : /home/a/search/data/matchfusion_conf.tdbm
+  fusion_max_qrnum: 16
+  max_buy_day: 19
+
+strategies :
+  - default_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - default_strategy_wt_0 :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - distinct_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - PvAdDistinctHandler ?goto SearchDN
+        - SortHandler
+        - DisplayByRandomHandler
+        - SearchDN @ SearchDNHandler
+        - ResultHandler
+  - default_strategy_k2 :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - default_no_ad_filter_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_bt_nocache_dc_rtp_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc2_nocache_rtp_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_bt_nocache_rtp_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_bt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc2_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_recom_rcc2_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - RecomQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_bt_rcc_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_bt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc_opt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_bt_rcc_opt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_bt_opt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc_bt_opt_nocache_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_bt_rcc_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_recom_rcc_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - RecomQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_recom_bt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - RecomQRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_recom_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - RecomQRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_bt_displayControl_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_rcc2_opt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_bt_rcc_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_rcc_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_rcc_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - bt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - BtQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_noadd_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - add_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - gt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - GtQueryParserHandler
+        - SearchDmpHandler
+        - SearchGtSNHandler
+        - GtBidHandler
+        - SearchGtDNHandler
+        - GtResultHandler
+  - item_gt_strategy:
+      sessionName : MergerSession
+      sequence :
+        - GtQueryParserHandler
+        - SearchDmpHandler
+        - SearchItemGtSNHandler
+        - GtBidHandler
+        - SearchItemGtDNHandler
+        - GtResultHandler
+  - vt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_filter_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_add_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_vt_rcc_bt_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler ?goto AddQR
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - recom_vt_bt_rcc2_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - RecomQRHandler ?goto AddQR
+        - VtQRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - umeng_rcc2_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - UGetNickHandler
+        - QRPluginHandler
+        - Rcc2QRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - umeng_bt_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - UGetNickHandler
+        - QRPluginHandler
+        - BtQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - umeng_add_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - UGetNickHandler
+        - QRPluginHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - url_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - UrlQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchCacheHandler ?goto SortByEcpm
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_url_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchCacheHandler ?goto SortByEcpm
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_bt_url_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchCacheHandler ?goto SortByEcpm
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_user_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto User
+        - Rcc2QRHandler
+        - User @ UserQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchCacheHandler ?goto SortByEcpm
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_user_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto User
+        - Rcc2QRHandler
+        - User @ UserQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_user_displayControl_nocache_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto User
+        - Rcc2QRHandler
+        - User @ UserQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - DisplayControlHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - vt_rcc2_add_user_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler
+        - AddQR @ AddQRHandler
+        - UserQRHandler
+        - FilterHandler
+        - PostQRResultHandler
+        - SearchCacheHandler ?goto SortByEcpm
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - etrecom_rcc_bt_nocache_strategy : 
+      sessionName : MergerSession 
+      sequence : 
+        - QueryParserHandler 
+        - QueryPrepareHandler 
+        - QRPluginHandler 
+        - EtrecomQRHandler ?goto AddQR 
+        - Rcc2QRHandler ?goto AddQR 
+        - BtQRHandler 
+        - AddQR @ AddQRHandler 
+        - FilterHandler 
+        - PostQRResultHandler  
+        - SearchSNHandler 
+        - FilterNoWantCatsHandler
+        - RmDupHandler 
+        - SortHandler 
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - etrecom_strategy : 
+      sessionName : MergerSession 
+      sequence : 
+        - QueryParserHandler 
+        - QueryPrepareHandler 
+        - QRPluginHandler 
+        - EtrecomQRHandler
+        - FilterHandler 
+        - PostQRResultHandler  
+        - SearchSNHandler 
+        - FilterNoWantCatsHandler
+        - RmDupHandler 
+        - SortHandler 
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - etrecom_nofilter_strategy : 
+      sessionName : MergerSession 
+      sequence : 
+        - QueryParserHandler 
+        - QueryPrepareHandler 
+        - QRPluginHandler 
+        - EtrecomQRHandler
+        - PostQRResultHandler  
+        - SearchSNHandler 
+        - FilterNoWantCatsHandler
+        - RmDupHandler 
+        - SortHandler 
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_adgr_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - AddCreativeidHandler
+        - SearchDNHandler
+        - ResultHandler
+  - crowd_composer_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - CrowdComposerHandler
+        - AddQRHandler
+        - PostQRResultHandler
+        - CrowdComposerSNHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - outbt_1_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - OutbtQRHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - outbt_2_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - OutbtQRHandler
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_fusion_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - Rcc2QRHandler
+        - BtQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - wt_match_fusion_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - Rcc2QRHandler
+        - BtQRHandler
+        - UrlQRHandler
+        - AddQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_bt_noopt_rtp_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_fusion_noadd_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler
+        - Rcc2QRHandler
+        - BtQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_service_fusion_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler
+        - MatchService
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_service_fusion_noadd_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler
+        - MatchService
+        - BtQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_service_first_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - MatchService ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_match_service_first_noadd_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - MatchService ?goto OptQR
+        - Rcc2QRHandler ?goto OptQR
+        - BtQRHandler
+        - OptQR @ OptimizerQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - default_fatigue_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - VtQRHandler ?goto AddQR
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler ?goto AddQR
+        - UrlQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - FatigueControlQRHandler
+        - PostQRResultHandler 
+        - SearchCacheHandler ?goto SortByEcpm 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - UpdateCacheHandler
+        - SortByEcpm @ SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - rcc2_bt_nocache_rtp_fatigue_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - Rcc2QRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - OrsHandler
+        - FatigueControlQRHandler
+        - PostQRResultHandler 
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - usermodel_rtp_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - UserModelQRHandler ?goto AddQR
+        - BtQRHandler
+        - AddQR @ AddQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_usermodel_fusion_add_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - UserModelQRHandler
+        - Rcc2QRHandler
+        - MatchService
+        - BtQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
+  - k2_usermodel_fusion_replace_strategy :
+      sessionName : MergerSession
+      sequence :
+        - QueryParserHandler
+        - QueryPrepareHandler
+        - QRPluginHandler
+        - UserModelQRHandler
+        - MatchService
+        - BtQRHandler
+        - OptimizerQRHandler
+        - FilterHandler
+        - FusionQRHandler
+        - OrsHandler
+        - PostQRResultHandler
+        - SearchSNHandler
+        - FilterNoWantCatsHandler
+        - RmDupHandler
+        - SortHandler
+        - SortByEcpmHandler
+        - BidHandler
+        - DisplayByRandomHandler
+        - SearchDNHandler
+        - ResultHandler
